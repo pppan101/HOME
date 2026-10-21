@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>our little archive. — BOYNEXTDOOR</title>
+
+<!-- 特殊字体 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=DM+Mono:wght@400;500&family=Caveat:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Gowun+Batang:wght@400;700&family=Noto+Serif+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --paper: #f7f2e9;
+  --paper-light: #fffdf8;
+  --brown-soft: #755849;
+  --brown-light: #b49a83;
+  --blue-deep: #6f91aa;
+  --blue-pale: #e1eaf0;
+  --brown: #514035;
+  --blue: #86a9c1;
+  --light-blue: #dce7ed;
+  --muted: #9d8b7b;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #e8e0d5;
+  color: var(--brown);
+  font-family: "Cormorant Garamond", serif;
+  min-height: 100vh;
+}
+
+/* 手账纸张纹理 */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 20;
+  opacity: .32;
+  background-image: radial-gradient(#b6a18b 0.65px, transparent 0.65px);
+  background-size: 17px 17px;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 网页主体框 */
+.page {
+  background-color: var(--paper);
+  max-width: 1600px;
+  margin: 0 auto;
+  box-shadow: 0 0 80px rgba(81, 64, 53, 0.06);
+  min-height: 100vh;
+  position: relative;
+  padding: 40px 5vw 40px;
+}
+
+/* 顶部导航 */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  font: 12px "DM Mono", monospace; 
+  letter-spacing: 2px;
+  color: #6b5444; 
+  position: relative;
+  z-index: 2;
+}
+
+.topbar .logo {
+  font-family: "Bodoni Moda", serif;
+  font-size: 20px; 
+  letter-spacing: 1px;
+  color: var(--brown);
+}
+
+.topbar .status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  flex-shrink: 0;
+  background: var(--blue);
+  border-radius: 50%;
+}
+
+/* 首页主视觉 */
+.hero {
+  width: min(100%, 1200px);
+  margin: 40px auto 0;
+  display: grid;
+  grid-template-columns: 1fr 1.12fr;
+  align-items: center;
+  gap: clamp(20px, 5vw, 80px);
+}
+
+/* 左侧文字排版 */
+.intro {
+  position: relative;
+  z-index: 2;
+  padding: 20px 0;
+}
+
+.eyebrow {
+  font: 12px "DM Mono", monospace; 
+  letter-spacing: 3px;
+  color: var(--blue-deep);
+  margin-bottom: 22px;
+}
+
+.main-title {
+  font-family: "Bodoni Moda", serif;
+  font-size: clamp(38px, 4.5vw, 60px); 
+  font-weight: 400;
+  letter-spacing: -2px;
+  line-height: 1.12;
+  white-space: nowrap;
+}
+
+.main-title span {
+  display: block;
+  font-size: 12px; 
+  font-family: "DM Mono", monospace;
+  letter-spacing: 2.5px;
+  margin-top: 12px;
+  color: #755d4a; 
+}
+
+.title-line {
+  width: 68px;
+  height: 2px;
+  background: var(--blue);
+  margin: 26px 0;
+}
+
+.welcome {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(30px, 3.2vw, 42px); 
+  line-height: 1.2;
+}
+
+.welcome em {
+  color: #557f9b;
+  font-weight: 400;
+}
+
+.korean {
+  font-family: "Gowun Batang", serif;
+  font-size: 17px; 
+  letter-spacing: 1px;
+  margin-top: 24px;
+}
+
+.内部技能 {
+  font-family: "Noto Serif SC", serif;
+  font-size: 13px; 
+  color: #85705d;
+  letter-spacing: 2px;
+  margin-top: 10px;
+}
+
+.signature {
+  font-family: "Caveat", cursive;
+  font-size: 30px; 
+  color: #557f9b;
+  margin-top: 27px;
+  transform: rotate(-4deg);
+  display: inline-block;
+}
+
+.signature span {
+  font-size: 20px;
+}
+
+/* 右侧拍立得 */
+.photo-stage {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  justify-self: center;
+}
+
+.polaroid {
+  background: var(--paper-light);
+  border: 1px solid #e4d8c9;
+  padding: 12px 12px 49px;
+  box-shadow: 0 12px 32px #57473612, 0 3px 8px #5747360c;
+  transform: rotate(2.5deg);
+  position: relative;
+}
+
+.photo {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #dce6e7;
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .8s ease;
+}
+
+.polaroid:hover .photo img {
+  transform: scale(1.035);
+}
+
+.photo-caption {
+  position: absolute;
+  bottom: 14px;
+  left: 17px;
+  font: 12px "DM Mono", monospace; 
+  letter-spacing: 1.5px;
+  color: #6b5444;
+}
+
+.tape {
+  position: absolute;
+  z-index: 3;
+  top: -13px;
+  left: 38%;
+  width: 94px;
+  height: 27px;
+  background: #a8c3d2b8;
+  transform: rotate(-7deg);
+  clip-path: polygon(2% 0, 98% 3%, 100% 96%, 0 100%);
+}
+
+.sticker {
+  position: absolute;
+  z-index: 4;
+  color: #86a9c1;
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 400;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.star-one {
+  top: 13%;
+  right: -23px;
+  font-size: 35px;
+  transform: rotate(12deg);
+}
+
+.star-two {
+  bottom: 17%;
+  left: -22px;
+  font-size: 25px;
+  transform: rotate(-12deg);
+}
+
+.note {
+  position: absolute;
+  right: -28px;
+  bottom: 4%;
+  z-index: 4;
+  font: 20px "Caveat", cursive; 
+  color: #557f9b;
+  transform: rotate(8deg);
+}
+
+.dashed-circle {
+  position: absolute;
+  width: 75px;
+  height: 75px;
+  border: 1px dashed #86a9c1;
+  border-radius: 50%;
+  left: -28px;
+  top: 15%;
+  opacity: .8;
+  pointer-events: none;
+}
+
+/* 底部 ENTER 按钮 */
+.bottom {
+  width: min(100%, 1200px);
+  margin: 60px auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border-top: 1px dashed #c9b6a3;
+  padding-top: 22px;
+}
+
+.bottom-note {
+  font: 11px "DM Mono", monospace; 
+  letter-spacing: 1.5px;
+  color: #755d4a;
+  line-height: 2;
+}
+
+.enter-btn {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 13px 20px;
+  min-width: 170px;
+  border: 1px solid #7898b0;
+  background: transparent;
+  font: 13px "DM Mono", monospace; 
+  letter-spacing: 3px;
+  transition: .3s ease;
+}
+
+.enter-btn .arrow {
+  font-size: 17px;
+  transition: transform .3s ease;
+}
+
+.enter-btn:hover {
+  background: #5a4639;
+  color: var(--paper);
+  border-color: var(--brown);
+}
+
+.enter-btn:hover .arrow {
+  transform: translateX(5px);
+}
+
+.page-number {
+  position: absolute;
+  right: 6vw;
+  top: 50%;
+  writing-mode: vertical-rl;
+  font: 11px "DM Mono", monospace; 
+  letter-spacing: 3px;
+  color: #99826e;
+}
+
+/* 成员列表页 */
+#membersPage {
+  display: none;
+}
+
+.members-header {
+  max-width: 1000px;
+  margin: 60px auto 45px;
+  text-align: center;
+}
+
+.members-header .eyebrow {
+  margin-bottom: 12px;
+}
+
+.members-header h1 {
+  font: 400 clamp(34px, 7vw, 68px) "Bodoni Moda", serif;
+  letter-spacing: 2px;
+}
+
+.members-header p {
+  margin-top: 12px;
+  font-size: 17px; 
+  color: #806b5d;
+}
+
+.member-grid {
+  width: min(100%, 1300px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px;
+}
+
+.member-card {
+  text-align: center;
+  box-shadow: 2px 3px 0 #8aa7ba20;
+  padding: 12px;
+  border: 1px dashed #c8b29c;
+  background: #e8edf0a8;
+  transform: rotate(-1deg);
+  transition: .3s ease;
+}
+
+.member-card:nth-child(even) {
+  transform: rotate(1.5deg);
+  background: #f1f4f4b8;
+}
+
+.member-card:hover {
+  transform: translateY(-5px) rotate(0);
+}
+
+.member-photo {
+  aspect-ratio: 4 / 3;
+  background: var(--light-blue);
+  overflow: hidden;
+}
+
+.member-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.member-card h2 {
+  margin-top: 16px;
+  color: #5b4638;
+  font: 28px "Bodoni Moda", serif; 
+  letter-spacing: 1px;
+}
+
+.member-card p {
+  font: 11px "DM Mono", monospace; 
+  color: #806b5d;
+  letter-spacing: 2px;
+  margin: 6px 0 12px;
+}
+
+.member-thought {
+  border-top: 1px dashed #d4c1ae;
+  padding: 14px 4px 6px;
+  text-align: left;
+}
+
+.member-thought .korean-thought {
+  font: 15px/1.85 "Gowun Batang", serif; 
+  letter-spacing: -.2px;
+  color: #4a372b;
+  overflow-wrap: anywhere;
+}
+
+.member-thought .chinese-thought {
+  margin-top: 6px;
+  font: 14px/1.85 "Noto Serif SC", serif; 
+  font-weight: 400;
+  letter-spacing: .2px;
+  color: #755d4a;
+  overflow-wrap: anywhere;
+}
+
+.member-thought .thought-heart {
+  display: block;
+  margin-top: 6px;
+  text-align: right;
+  color: #789fba;
+  font: 20px "Cormorant Garamond", serif;
+}
+
+.back-btn {
+  display: block;
+  margin: 55px auto 0;
+  cursor: pointer;
+  padding: 12px 25px;
+  background: transparent;
+  border: 1px solid #8fa8b7;
+  font: 12px "DM Mono", monospace; 
+  letter-spacing: 2px;
+}
+
+footer {
+  text-align: center;
+  margin: 45px 0 20px;
+  font: 11px "DM Mono", monospace; 
+  letter-spacing: 2px;
+  color: #927b69;
+}
+
+.members-header .members-title {
+  font-family: "Gowun Batang", serif;
+  font-size: clamp(26px, 4.6vw, 40px);
+  font-weight: 400;
+  letter-spacing: -1px;
+  line-height: 1.65;
+}
+
+.members-header .members-title-cn {
+  margin-top: 4px;
+  color: #755d4a;
+  font-family: "Noto Serif SC", serif;
+  font-size: 14px; 
+  font-weight: 400;
+  letter-spacing: 2px;
+}
+
+/* 手机端适配 */
+@media (max-width: 650px) {
+  .page { padding: 22px 23px 26px; box-shadow: none; }
+  .topbar { font-size: 10px; letter-spacing: 1px; }
+  .topbar .logo { font-size: 16px; }
+  .hero { grid-template-columns: 1fr; gap: 24px; margin-top: 12px; }
+  .intro { padding: 12px 4px 0; order: 2; }
+  .photo-stage { width: 76%; max-width: 310px; order: 1; margin: 8px auto 0; }
+  .main-title { font-size: clamp(32px, 8.8vw, 46px); letter-spacing: -1.5px; }
+  .welcome { font-size: 31px; }
+  .bottom { margin-top: 30px; }
+  .member-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .member-card h2 { font-size: 22px; }
+  .member-thought .korean-thought { font-size: 13px; }
+  .member-thought .chinese-thought { font-size: 12px; }
+}
+
+/* 细节重写 */
+body { background-color: var(--paper); color: var(--brown); }
+.topbar .logo, .main-title, .members-title, .member-card h2 { color: #493326; }
+.topbar { color: #755d4a; }
+.eyebrow, .signature, .sticker, .note { color: #557f9b; }
+.title-line { height: 2px; background: #789fba; position: relative; }
+.title-line::after { content: '✧'; position: absolute; right: -16px; top: -11px; color: #789fba; font-size: 16px; }
+.polaroid { background: #fffaf2; border: 1px solid #c9b39b; box-shadow: 0 14px 0 #d9c5af, 0 18px 34px #49332620, 5px 6px 0 #789fba12; }
+.photo { background: linear-gradient(145deg, #dce8ef 0%, #a9c2d1 48%, #8a9eaa 100%); border: 1px solid #789fba; }
+.tape { background: #789fbaad; }
+.bottom { border-top: 1px dashed #b69a7e; }
+.enter-btn { color: #493326; border: 1px solid #557f9b; background: #e4edf2; box-shadow: 3px 3px 0 #b69a7e70; }
+.enter-btn:hover { background: #493326; color: #fffaf2; border-color: #493326; box-shadow: 2px 2px 0 #789fba; }
+.member-card { background: #fffaf2; border: 1px solid #c9b39b; box-shadow: 3px 4px 0 #d6c0a9, 7px 8px 18px #4933260b; padding: 10px 10px 12px; }
+.member-card::before { content: ''; position: absolute; z-index: 3; top: -8px; left: 36%; width: 56px; height: 17px; background: #789fba9c; transform: rotate(-4deg); clip-path: polygon(2% 0,98% 4%,100% 96%,0 100%); }
+.member-card:nth-child(even)::before { background: #b69a7e9c; transform: rotate(4deg); }
+.member-photo { background: #dbe7ee; border: 1px solid #789fba; position: relative; }
+.member-thought { background: #e4edf2; border: 1px dashed #8ca9bb; padding: 12px 10px 8px; margin-top: 10px; position: relative; }
+.member-thought::before { content: '✧'; position: absolute; right: 7px; top: -10px; color: #789fba; background: #e4edf2; padding: 0 3px; font-size: 13px; }
+.back-btn { color: #493326; border-color: #557f9b; background: #e4edf2; box-shadow: 3px 3px 0 #b69a7e70; }
+
+/* 详情页 */
+#detailPage { background-image: linear-gradient(180deg, #f5efe5 0%, #f8f3eb 100%); }
+.profile-heading { text-align:center; margin: 35px auto 28px; }
+.profile-title { font: 400 clamp(34px, 6vw, 56px) "Bodoni Moda", serif; letter-spacing: 2px; }
+.profile-subtitle { margin-top: 8px; color:#80634d; font: 11px "DM Mono", monospace; letter-spacing:2px; }
+.profile-layout { width:min(100%, 1300px); margin:0 auto; display:grid; grid-template-columns:minmax(0, .9fr) minmax(0, 1.1fr); align-items:start; gap:clamp(40px, 8vw, 100px); padding-top: 10px; }
+.profile-photo-stage { width:100%; max-width:480px; margin-top: 5px; }
+.profile-polaroid { transform:rotate(-1.5deg); padding: 14px 14px 55px; }
+.profile-photo { aspect-ratio: 3 / 4; }
+/* 照片显示焦点靠上，优先露脸 */
+.profile-photo img { 
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  object-position: center 15%; 
+  filter: none; 
+  transition: transform .7s ease; 
+}
+.profile-info-wrap { position:relative; }
+.profile-info-card { position:relative; padding:24px clamp(18px, 3vw, 30px) 22px; background:#fffaf2; border:1px solid #c9b39b; box-shadow:4px 5px 0 #d6c0a9, 8px 10px 22px #4933260b; transform:rotate(.7deg); }
+.profile-info-card::before { content:""; position:absolute; top:-10px; left:42%; width:78px; height:22px; background:#789fba9c; transform:rotate(-3deg); clip-path:polygon(2% 0,98% 4%,100% 96%,0 100%); }
+.info-card-top { display:flex; justify-content:space-between; gap:12px; padding-bottom:11px; border-bottom:1px dashed #b69a7e; color:#80634d; font:10px "DM Mono",monospace; letter-spacing:1.5px; }
+.info-name-row { display:flex; align-items:center; gap:34px; margin:22px 0 24px; }
+.info-id-photo { width:104px; aspect-ratio:3 / 4; flex:0 0 auto; padding:3px; background:#fffdf8; border:1px solid #c9b39b; box-shadow:2px 3px 0 #d6c0a9; transform:rotate(-2deg); overflow:hidden; }
+.info-id-photo img { display:block; width:100%; height:100%; object-fit:cover; object-position:center 25%; filter:saturate(.88) contrast(.98); }
+.info-name-copy { min-width:0; }
+.info-name-label { display:block; margin-bottom:6px; color:#789fba; font:10px "DM Mono",monospace; letter-spacing:1.3px; }
+.info-card-name { margin:0; font:400 34px "Noto Serif SC",serif; letter-spacing:2px; }
+.info-grid { display:grid; grid-template-columns:1fr 1fr; border-top:1px solid #e5d8c8; }
+.info-item { padding:12px 8px 11px 0; border-bottom:1px solid #e5d8c8; min-width:0; }
+.info-label { display:block; color:#789fba; font:10px "DM Mono",monospace; letter-spacing:1.5px; margin-bottom:6px; }
+.info-value { display:block; color:#493326; font:15px/1.65 "Noto Serif SC",serif; overflow-wrap:anywhere; }
+.profile-trait { position: relative; margin-top: 18px; padding: 16px 15px 14px; background: #e4edf2; border: 1px dashed #8ca9bb; max-height: 380px; overflow-y: auto; }
+.profile-trait::-webkit-scrollbar { width: 5px; }
+.profile-trait::-webkit-scrollbar-thumb { background: #a3bdcf; border-radius: 4px; }
+.profile-trait::-webkit-scrollbar-track { background: transparent; }
+.trait-label { color: #557f9b; font: 10px "DM Mono", monospace; letter-spacing: 1.5px; display: block; margin-bottom: 10px; }
+.profile-trait p { margin-top: 0; font: 16px/1.85 "Noto Serif SC", serif; color: #493326; white-space: pre-line; }
+.profile-trait p::before { content: "◦ "; color: #789fba; font-weight: bold; margin-right: 4px; }
+.kr-line { display: block; font: 14px/1.5 "Gowun Batang", serif; color: #688296; margin-bottom: 3px; }
+.trait-heart { display:block; text-align:right; color:#557f9b; font-size:20px; margin-top: 5px; }
+.handwritten { margin-top:17px; text-align:right; font:20px "Caveat",cursive; color:#557f9b; transform:rotate(-3deg); }
+.profile-side-note { margin-top:18px; text-align:right; font:18px "Caveat",cursive; color:#80634d; }
+#detailPage .back-btn { margin-top:34px; }
+
+/* 舞台与音频 */
+.archive-modules { width: min(100%, 1300px); margin: 58px auto 0; }
+.archive-section { margin:0 auto 46px; padding:26px clamp(14px,3vw,28px) 30px; position:relative; background:#fffaf2; border:1px solid #c9b39b; box-shadow:4px 5px 0 #d6c0a9; }
+.archive-section::before { content:""; position:absolute; top:-9px; left:42%; width:76px; height:20px; background:#789fba9c; transform:rotate(-3deg); clip-path:polygon(2% 0,98% 4%,100% 96%,0 100%); }
+.archive-section-head { text-align:center; margin-bottom:20px; }
+.archive-kicker { color:#557f9b; font:11px "DM Mono",monospace; letter-spacing:2px; }
+.archive-section-title { margin-top:7px; color:#493326; font:400 clamp(28px,4vw,40px) "Bodoni Moda",serif; letter-spacing:1px; }
+.archive-section-desc { margin-top:7px; color:#80634d; font:14px/1.7 "Noto Serif SC",serif; }
+.stage-fan { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 17px; align-items: stretch; margin-top: 4px; }
+.stage-card { position:relative; min-width:0; width:100%; height:100%; display:flex; flex-direction:column; align-items:stretch; text-align:left; padding:11px; background:#f7f2e9; border:1px dashed #b69a7e; box-shadow:none; cursor:pointer; transform:rotate(-.6deg); transition:transform .28s ease; }
+.stage-card:nth-child(even) { transform:rotate(.7deg); }
+.stage-card .stage-cover { width:100%; aspect-ratio:3/4; overflow:hidden; background:linear-gradient(145deg,#dbe7ee,#b7c8d2 55%,#e6d6c5); border:1px solid #d6e0e6; }
+.stage-cover img { width:100%; height:100%; object-fit:cover; display:block; }
+.stage-card .stage-tape { position:absolute; z-index:2; width:56px; height:15px; top:-6px; left:calc(50% - 28px); background:#789fba9c; transform:rotate(-5deg); }
+.stage-card h3 { margin-top:12px; font:12px "DM Mono",monospace; letter-spacing:1.2px; color:#557f9b; }
+.stage-card p { margin-top:5px; font:19px "Cormorant Garamond",serif; color:#493326; }
+.stage-card small { display:block; margin-top:5px; color:#806b5d; font:10px "DM Mono",monospace; }
+.stage-card .stage-tap { margin-top:auto; padding-top:12px; color:#557f9b; font:10px "DM Mono",monospace; }
+.stage-card:hover { transform:translateY(-5px) rotate(0deg); box-shadow:3px 6px 0 #d6c0a9; background:#fffaf2; }
+
+.voice-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+.voice-card { --song-paper:#f7f2e9; --song-accent:#8ca9bb; --song-edge:#b69a7e; min-width:0; padding:14px; background:var(--song-paper); border:1px dashed var(--song-edge); transform:rotate(-.6deg); transition:background .25s ease, border-color .25s ease; }
+.voice-card:nth-child(even) { transform:rotate(.7deg); }
+/* 封面保留原色；卡片只取柔和的低饱和同色系 */
+.voice-card.palette-pink { --song-paper:#f2e1e4; --song-accent:#ad7182; --song-edge:#d5aab2; }
+.voice-card.palette-lilac { --song-paper:#eae5f0; --song-accent:#81739d; --song-edge:#b9aecb; }
+.voice-card.palette-apricot { --song-paper:#f3e4d8; --song-accent:#b77751; --song-edge:#d9b398; }
+.voice-card.palette-sage { --song-paper:#e3ece7; --song-accent:#6f9388; --song-edge:#b1c8bc; }
+.voice-card.palette-blue { --song-paper:#e1eaf1; --song-accent:#6f91aa; --song-edge:#a9c1d1; }
+.voice-card.palette-butter { --song-paper:#f1ebd7; --song-accent:#a28a4f; --song-edge:#d4c69b; }
+.voice-card.palette-cocoa { --song-paper:#ebe1d8; --song-accent:#896c58; --song-edge:#c9b39b; }
+.voice-cover { width:100%; aspect-ratio:1/1; background:linear-gradient(145deg,#dbe7ee,#b7c8d2 55%,#e6d6c5); overflow:hidden; border:1px solid var(--song-edge); }
+.voice-cover img { width:100%; height:100%; display:block; object-fit:cover; }
+.voice-card h3 { margin-top:12px; font:15px "DM Mono",monospace; overflow-wrap:anywhere; color: #493326; }
+.voice-favorite { margin-top:9px; padding:12px 10px; background:color-mix(in srgb, var(--song-paper) 72%, white); border-left:3px solid var(--song-accent); color:#493326; font:14px/1.8 "Gowun Batang",serif; white-space: pre-line; }
+.voice-favorite .translation { display:block; margin-top:6px; color:#755d4a; font:13px/1.7 "Noto Serif SC",serif; }
+.voice-controls { display:flex; align-items:center; gap:8px; margin-top:11px; flex-wrap: wrap; }
+.voice-controls button,.lyrics-open { border:1px solid var(--song-edge); background:#fffaf2; padding:8px 12px; cursor:pointer; font:11px "DM Mono",monospace; color: #493326;}
+.voice-controls audio { display:none; }
+.voice-progress { flex:1; min-width:0; accent-color:var(--song-accent, #557f9b); }
+.voice-time { color:#806b5d; font:10px "DM Mono",monospace; white-space:nowrap; }
+.voice-card-bottom { display:flex; flex-direction: column; align-items:flex-start; gap:6px; margin-top:10px; }
+.voice-note { color:var(--song-accent, #806b5d); font:16px "Caveat",cursive; }
+
+.media-modal { display:none; position:fixed; inset:0; z-index:1000; background:#241c18e8; align-items:center; justify-content:center; padding:22px; }
+.media-modal.is-open { display:flex; }
+.modal-paper { position:relative; width:min(100%,680px); max-height:90vh; overflow:auto; padding:24px; background:#fffaf2; border:1px solid #c9b39b; transition: width 0.3s ease; }
+.modal-close { position:absolute; top:10px; right:10px; border:1px solid #8ca9bb; background:#e4edf2; padding:7px 10px; cursor:pointer; font:12px "DM Mono",monospace; }
+.modal-title { margin:5px 44px 16px 0; font:400 28px "Bodoni Moda",serif; }
+.modal-video { display:block; width:100%; max-height:70vh; object-fit:contain; background:#171513; }
+.modal-paper.is-vertical { width: min(100%, 420px); }
+.modal-placeholder { padding:35px 16px; text-align:center; background:#e4edf2; border:1px dashed #8ca9bb; color:#493326; font:15px/1.9 "Noto Serif SC",serif; }
+.lyrics-content { white-space:pre-line; color:#493326; font:16px/2 "Gowun Batang",serif; }
+
+/* ===== 优化比例：BBNEXDO 马卡龙色官方档案小卡 ===== */
+.plush-card {
+  width: 100%;
+  max-width: 360px; /* 加宽卡片 */
+  margin: 25px auto 10px;
+  padding: 16px 20px; /* 优化内边距 */
+  background: var(--plush-wash, #e4edf2);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 2px 4px 12px rgba(81, 64, 53, 0.1);
+  position: relative;
+  transform: rotate(-1.5deg);
+  border-radius: 6px;
+}
+/* 左上角的回形针 */
+.plush-card::after {
+  content: "📎";
+  position: absolute;
+  top: -12px;
+  left: 15px;
+  font-size: 22px;
+  transform: rotate(-20deg);
+  filter: drop-shadow(1px 2px 2px rgba(0,0,0,0.2));
+}
+.plush-card-kicker { 
+  color: var(--plush-accent, #557f9b); 
+  font: 10px "DM Mono", monospace; 
+  letter-spacing: 1.5px; 
+  margin-bottom: 12px; 
+  text-align: center;
+  font-weight: 600;
+}
+.plush-card-content { 
+  display: flex; 
+  align-items: center; 
+  gap: 15px; 
+}
+/* 放大玩偶头像框 */
+.plush-visual {
+  width: 105px;
+  height: 105px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background: #fff;
+  border: 2px dashed var(--plush-accent, #8ca9bb);
+}
+/* 让玩偶铺满相框 */
+.plush-visual img { 
+  display: block; 
+  width: 100%; 
+  height: 100%; 
+  object-fit: contain; 
+  padding: 4px; 
+}
+.plush-copy h3 { 
+  margin-top: 2px; 
+  color: #493326; 
+  font: 600 22px "Bodoni Moda", serif; /* 字体稍微放大 */
+  letter-spacing: 1px; 
+}
+.plush-copy p { 
+  margin-top: 2px; 
+  color: #755d4a; 
+  font: 18px "Caveat", cursive; /* 字体稍微放大 */
+  line-height: 1.1;
+}
+.plush-index { 
+  display: block; 
+  margin-top: 8px; 
+  color: var(--plush-accent, #557f9b); 
+  font: 9px "DM Mono", monospace; 
+  letter-spacing: .5px;
+}
+.plush-fallback {
+  display: grid;
+  place-items: center;
+  width: 100%; height: 100%;
+  color: var(--plush-accent, #557f9b);
+}
+
+/* ===== 完美还原小纸条效果 ===== */
+.profile-animal-note {
+  position: absolute; 
+  right: -15px; /* 往内收一点 */
+  bottom: 15px; /* 放在照片右下角 */
+  z-index: 10; 
+  width: 145px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 10px 8px 8px;
+  background: #fffaf2;
+  border: 1px dashed #9bb7c8;
+  box-shadow: 2px 3px 0 #d9c8b6;
+  transform: rotate(5deg);
+  text-align: center;
+  color: #557f9b;
+}
+.profile-animal-note::before {
+  content: "";
+  position: absolute;
+  width: 46px;
+  height: 13px;
+  top: -8px;
+  left: calc(50% - 23px);
+  background: #8eafc2a8;
+  transform: rotate(-4deg);
+}
+.profile-note-doodle {
+  width: 40px;
+  height: 32px;
+  overflow: visible;
+  color: #789fba;
+  stroke: currentColor;
+  fill: none; 
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+.profile-note-copy {
+  font: 18px/1.05 "Caveat", cursive;
+  color: #557f9b;
+  margin-top: 2px;
+}
+
+@media(max-width:650px) {
+  .profile-layout { grid-template-columns:1fr; gap:28px; width:min(100%, 420px); }
+  .profile-photo-stage { width:100%; max-width:420px; margin:5px auto 0; }
+  .profile-info-card { padding:22px 18px 19px; }
+  .info-id-photo { width:88px; }
+  .info-name-row { gap:26px; }
+  .info-card-name { font-size:25px; }
+  .profile-title { font-size:38px; }
+  .archive-section { padding:23px 12px 24px; }
+  .stage-fan { grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+  .voice-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+  .voice-progress { flex-basis:100%; order:3; }
+  .profile-animal-note { width:112px; padding:9px 6px 7px; right: -10px; bottom: 10px; }
+  .profile-note-copy { font-size:16px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 首页 -->
+<main class="page" id="homePage">
+  <header class="topbar">
+    <div class="logo">our little archive.</div>
+    <div class="status">A HOME FOR ONEDOOR</div>
+  </header>
+
+  <div class="hero">
+    <section class="intro">
+      <div class="eyebrow">♡ &nbsp; A LITTLE PLACE FOR US</div>
+      <h1 class="main-title">
+        BOYNEXTDOOR
+        <span>EST. 2023 — OUR STORY</span>
+      </h1>
+      <div class="title-line"></div>
+      <p class="welcome">
+        Welcome to<br>
+        our <em>HOME</em> ♡
+      </p>
+      <p class="korean">대본 없이, 우리 그대로.</p>
+      <p class="内部技能">没有剧本，只有我们。</p>
+      <div class="signature">For ONEDOOR <span>♡</span></div>
+    </section>
+
+    <section class="photo-stage">
+      <div class="dashed-circle"></div>
+      <div class="sticker star-one">✧</div>
+      <div class="sticker star-two">♡</div>
+      <div class="polaroid">
+        <div class="tape"></div>
+        <div class="photo"><img src="boynextdoor-group.jpg" alt="BOYNEXTDOOR 团体合照"></div>
+        <div class="photo-caption">just the way we are.</div>
+      </div>
+      <div class="note">stay with us ~</div>
+    </section>
+  </div>
+
+  <div class="bottom">
+    <div class="bottom-note">MADE WITH LOVE<br>JUST FOR OUR ONEDOOR ♡</div>
+    <button class="enter-btn" onclick="enterHome()"><span>[ ENTER ]</span><span class="arrow">↗</span></button>
+  </div>
+  <div class="page-number">VOL. 01 — OUR HOME</div>
+</main>
+
+<!-- 成员列表页 -->
+<main class="page" id="membersPage">
+  <header class="topbar">
+    <div class="logo">our little archive.</div>
+    <div class="status">WELCOME HOME</div>
+  </header>
+
+  <section class="members-header">
+    <div class="eyebrow">♡ &nbsp; MEET OUR BOYS</div>
+    <h1 class="members-title">_____와 보내는 조용한 오후.</h1>
+    <p class="members-title-cn">和他共度的午后</p>
+  </section>
+
+  <section class="member-grid">
+    <article class="member-card" role="button" tabindex="0" onclick="openMember(0)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openMember(0);}">
+      <div class="member-photo"><img src="sungho.jpg" alt="SUNGHO"></div>
+      <h2>SUNGHO</h2>
+      <p class="member-meta">01 — OUR BOY</p>
+      <div class="member-thought">
+        <p class="korean-thought">기대도 될 것 같은 그 넓은 어깨.</p>
+        <p class="chinese-thought">好像是……可以靠上去的那副宽肩膀。</p>
+        <span class="thought-heart" aria-hidden="true">♡</span>
+      </div>
+    </article>
+    <article class="member-card" role="button" tabindex="0" onclick="openMember(1)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openMember(1);}">
+      <div class="member-photo"><img src="riwoo.jpg" alt="RIWOO"></div>
+      <h2>RIWOO</h2>
+      <p class="member-meta">02 — OUR BOY</p>
+      <div class="member-thought">
+        <p class="korean-thought">눈 밑에 또렷한 작은 눈물점.</p>
+        <p class="chinese-thought">眼下那颗清清楚楚的泪痣。</p>
+        <span class="thought-heart" aria-hidden="true">♡</span>
+      </div>
+    </article>
+    <article class="member-card" role="button" tabindex="0" onclick="openMember(2)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openMember(2);}">
+      <div class="member-photo"><img src="jaehyun.jpg" alt="JAEHYUN"></div>
+      <h2>JAEHYUN</h2>
+      <p class="member-meta">03 — OUR BOY</p>
+      <div class="member-thought">
+        <p class="korean-thought">웃을 때 올라간 뾰족한 입꼬리.</p>
+        <p class="chinese-thought">笑起来向上勾起的尖尖嘴角。</p>
+        <span class="thought-heart" aria-hidden="true">♡</span>
+      </div>
+    </article>
+    <article class="member-card" role="button" tabindex="0" onclick="openMember(3)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openMember(3);}">
+      <div class="member-photo"><img src="taesan.jpg" alt="TAESAN"></div>
+      <h2>TAESAN</h2>
+      <p class="member-meta">04 — OUR BOY</p>
+      <div class="member-thought">
+        <p class="korean-thought">빛에 따라 더 또렷해지는 그의 턱선.</p>
+        <p class="chinese-thought">随着光线而更加清晰的……他的下颌线。</p>
+        <span class="thought-heart" aria-hidden="true">♡</span>
+      </div>
+    </article>
+    <article class="member-card" role="button" tabindex="0" onclick="openMember(4)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openMember(4);}">
+      <div class="member-photo"><img src="leehan.jpg" alt="LEEHAN"></div>
+      <h2>LEEHAN</h2>
+      <p class="member-meta">05 — OUR BOY</p>
+      <div class="member-thought">
+        <p class="korean-thought">물고기보다 더 신비로운 네 눈.</p>
+        <p class="chinese-thought">比鱼还神秘的眼睛。</p>
+        <span class="thought-heart" aria-hidden="true">♡</span>
+      </div>
+    </article>
+    <article class="member-card" role="button" tabindex="0" onclick="openMember(5)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openMember(5);}">
+      <div class="member-photo"><img src="woonhak.jpg" alt="WOONHAK"></div>
+      <h2>WOONHAK</h2>
+      <p class="member-meta">06 — OUR BOY</p>
+      <div class="member-thought">
+        <p class="korean-thought">16개의 치아가 보이는 그 미소.</p>
+        <p class="chinese-thought">露出16颗牙的笑容。</p>
+        <span class="thought-heart" aria-hidden="true">♡</span>
+      </div>
+    </article>
+  </section>
+
+  <button class="back-btn" onclick="backHome()">↶ &nbsp; BACK TO OUR HOME</button>
+  <footer>MADE WITH LOVE FOR ONEDOOR ♡</footer>
+</main>
+
+
+<!-- 成员个人档案页 -->
+<main class="page" id="detailPage" style="display:none">
+  <header class="topbar">
+    <div class="logo">our little archive.</div>
+    <div class="status" id="detailStatus">SUNGHO — FILE</div>
+  </header>
+
+  <section class="profile-heading">
+    <div class="eyebrow">♡ &nbsp; A LITTLE PIECE OF HIM</div>
+    <h1 class="profile-title" id="profileTitle">SUNGHO</h1>
+    <p class="profile-subtitle" id="profileSubtitle">PERSONAL ARCHIVE / NO. 01</p>
+  </section>
+
+  <section class="profile-layout">
+    <div class="photo-stage profile-photo-stage">
+      <div class="dashed-circle"></div>
+      <div class="sticker star-one">✧</div>
+      <div class="sticker star-two">♡</div>
+      
+      <div class="polaroid profile-polaroid">
+        <div class="tape"></div>
+        <div class="photo profile-photo">
+          <img id="profileImage" src="sungho-detail.jpg" alt="SUNGHO">
+        </div>
+        <div class="photo-caption" id="profileCaption">01 / OUR BOY</div>
+        
+        <!-- 小纸条直接悬浮在拍立得右下角 -->
+        <div class="note profile-animal-note" id="profileAnimal" aria-label="A little handwritten note">
+          <svg class="profile-note-doodle" id="profileDoodle" viewBox="0 0 48 36" aria-hidden="true"></svg>
+          <span class="profile-note-copy" id="profileNoteCopy">quietly by your side ♡</span>
+        </div>
+      </div>
+      
+      <!-- 底部玩偶档案小卡 -->
+      <section class="plush-card" id="plushCard" aria-label="Official BBNEXDO character plush">
+        <div class="plush-card-kicker">♡ &nbsp; LITTLE GUARDIAN</div>
+        <div class="plush-card-content">
+          <div class="plush-visual" id="profilePlushVisual">
+            <img id="profilePlushImage" src="catbbi.jpg" alt="CATBBI official character plush" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+            <div class="plush-fallback" id="profilePlushFallback" style="display:none"><span>♡</span><small>ADD PLUSH</small></div>
+          </div>
+          <div class="plush-copy">
+            <span class="plush-label">OFFICIAL CHARACTER</span>
+            <h3 id="profilePlushName">CATBBI</h3>
+            <p id="profilePlushCaption">a tiny guardian to keep ♡</p>
+            <span class="plush-index" id="profilePlushIndex">COLLECTIBLE 01 / 06</span>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="profile-info-wrap">
+      <div class="profile-info-card">
+        <div class="info-card-top">
+          <span>PERSONAL FILE</span><span id="profileNumber">No. 01</span>
+        </div>
+        <div class="info-name-row">
+          <div class="info-id-photo"><img id="profileIdImage" src="sungho-id.jpg" alt="SUNGHO ID portrait"></div>
+          <div class="info-name-copy">
+            <span class="info-name-label">MEMBER ID / NO. 01</span>
+            <h2 class="info-card-name" id="profileChineseName">朴成淏</h2>
+          </div>
+        </div>
+        <div class="info-grid" id="profileFacts"></div>
+        
+        <div class="profile-trait">
+          <span class="trait-label">A LITTLE NOTE ABOUT HIM</span>
+          <p id="profileTrait">像猫一样安静又有自己的节奏，认真起来时却很可靠。</p>
+          <span class="trait-heart">♡</span>
+        </div>
+
+        <div class="handwritten" id="profileSignature">keep this little moment.</div>
+      </div>
+      <p class="profile-side-note">collected with love, just for you ♡</p>
+    </div>
+  </section>
+
+
+  <!-- 成员专属舞台与声音收藏 -->
+  <section class="archive-modules" id="memberArchives" hidden>
+    <section class="archive-section" aria-labelledby="stageArchiveTitle">
+      <header class="archive-section-head">
+        <div class="archive-kicker">♡ &nbsp; MOMENTS UNDER THE LIGHTS</div>
+        <h2 class="archive-section-title" id="stageArchiveTitle">Stage Archive</h2>
+        <p class="archive-section-desc">a few stages I want to keep.</p>
+      </header>
+      
+      <div class="stage-fan" id="stageFan"></div>
+      
+      <p class="archive-footnote">Choose a stage card to watch the performance ♡</p>
+    </section>
+
+    <section class="archive-section" id="voiceLogSection" aria-labelledby="voiceLogTitle">
+      <header class="archive-section-head">
+        <div class="archive-kicker">♡ &nbsp; LITTLE PIECES OF HIS VOICE</div>
+        <h2 class="archive-section-title" id="voiceLogTitle">Voice Log</h2>
+        <p class="archive-section-desc">songs, lines, and little moments I keep replaying.</p>
+      </header>
+      <div class="voice-grid" id="voiceLogGrid"></div>
+      <p class="archive-footnote" style="margin-top:17px">Audio and cover files can be added to the matching folders later.</p>
+    </section>
+  </section>
+
+  <div class="media-modal" id="stageModal" role="dialog" aria-modal="true" aria-labelledby="stageModalTitle">
+    <div class="modal-paper">
+      <button class="modal-close" type="button" data-close-modal="stageModal">CLOSE ×</button>
+      <div class="archive-kicker">STAGE ARCHIVE</div>
+      <h2 class="modal-title" id="stageModalTitle">DANGEROUS</h2>
+      <div id="stageVideoContainer" class="modal-placeholder">Your stage video will appear here once you add the video file.<br>Place it in <code>videos/leehan-dangerous.mp4</code>.</div>
+    </div>
+  </div>
+
+  <div class="media-modal" id="lyricsModal" role="dialog" aria-modal="true" aria-labelledby="lyricsModalTitle">
+    <div class="modal-paper">
+      <button class="modal-close" type="button" data-close-modal="lyricsModal">CLOSE ×</button>
+      <div class="archive-kicker">A LYRIC TO KEEP</div>
+      <h2 class="modal-title" id="lyricsModalTitle">123-78</h2>
+      <div class="lyrics-content" id="lyricsModalContent"></div>
+    </div>
+  </div>
+
+  <button class="back-btn" onclick="backMembers()">↶ &nbsp; BACK TO MEMBERS</button>
+  <footer>MADE WITH LOVE FOR ONEDOOR ♡</footer>
+</main>
+
+<script>
+
+const memberProfiles = [
+  {
+    name:"SUNGHO", cn:"朴成淏", nationality:"韩国", birthday:"2003年9月4日", zodiac:"处女座", height:"174 cm", mbti:"ENTJ", note:"quietly by your side ♡", doodle:"cat", plushName:"CATBBI", plushImage:"catbbi.jpg", plushColor:"#d4889b", plushWash:"#fce8ec", plushCaption:"a tiny guardian to keep ♡", position:"主唱", 
+    listImage:"sungho.jpg", detailImage:"sungho-detail.jpg", idImage:"sungho-id.jpg", 
+    trait: `本来打算走酷酷的、安静成熟的路线，但实际上是个爱笑到连本人都隐藏不住的性格💗<br><span class="kr-line">쿨하고 어른스러운 노선으로 가려 했는데, 본인도 숨기지 못할 정도로 잘 웃는 성격 💗</span>
+◦ 可靠的肩膀是魅力点<br><span class="kr-line">믿음직스러운 어깨가 매력 포인트</span>
+◦ 压倒性的 T（理智型）<br><span class="kr-line">압도적인 T</span>
+◦ 统率自由散漫成员的可靠长子（秩序）<br><span class="kr-line">자유로운 멤버들을 이끄는 장남 (질서)</span>
+◦ 非常喜欢运动，对自己要求严格！<br><span class="kr-line">운동을 정말 좋아해서 스토익!</span>
+◦ 瞬间就能俘获大家芳心的歌声 🎤<br><span class="kr-line">모두를 한순간에 사로잡는 목소리 🎤</span>
+♡ 爱干净到了会自掏腰包买齐清洁工具的程度<br><span class="kr-line">실비로 청소도구를 장만할 정도로 깔끔한 걸 좋아함</span>`
+  },
+  {
+    name:"RIWOO", cn:"李常赫", nationality:"韩国", birthday:"2003年10月22日", zodiac:"天秤座", height:"171 cm", mbti:"ISFP", note:"soft looks, sharp moves.", doodle:"puppy", plushName:"DALRING", plushImage:"dalring.jpg", plushColor:"#75b3c9", plushWash:"#e0f2f7", plushCaption:"quiet little company ♡", position:"主舞", 
+    listImage:"riwoo.jpg", detailImage:"riwoo-detail.jpg", idImage:"riwoo-id.jpg", 
+    trait: `无论什么发色都能完美驾驭的脸<br><span class="kr-line">어떤 머리색이든 잘 어울리는 얼굴</span>
+◦ 可爱的笑颜和泪痣是魅力点<br><span class="kr-line">귀여운 미소와 눈물방울이 매력 포인트</span>
+◦ 充满高级感（？）的大叔笑话<br><span class="kr-line">하이센스(?)한 아재 개그</span>
+◦ 平时是可爱风，一登上舞台就会被他 RIWOO 的风格所迷倒 ✨<br><span class="kr-line">평소엔 큐트, 무대에 오르면 RIWOO 스타일에 매료돼 ✨</span>
+◦ 非常喜欢甜甜圈 💛<br><span class="kr-line">도넛을 정말 좋아해 💛</span>
+◦ 吧嗒吧嗒小跑的样子也很可爱<br><span class="kr-line">총총총 달리는 모습도 사랑스러워</span>
+◦ 吧唧吧唧吃东西的样子太可爱了<br><span class="kr-line">냠냠 먹는 모습이 너무 귀여워</span>
+♡ 连编舞也全权负责的舞蹈机器 🕺<br><span class="kr-line">안무 제작도 도맡아 하는 댄스 머신 🕺</span>`
+  },
+  {
+    name:"JAEHYUN", cn:"明宰铉", nationality:"韩国", birthday:"2003年12月4日", zodiac:"射手座", height:"178 cm", mbti:"ENFP", note:"a little sunshine, always.", doodle:"sun", plushName:"MYNGMYNG", plushImage:"myngmyng.jpg", plushColor:"#d9947c", plushWash:"#fcebe4", plushCaption:"a little spark of joy ♡", position:"队长 / 主 rapper / All-rounder", 
+    listImage:"jaehyun.jpg", detailImage:"jaehyun-detail.jpg", idImage:"jaehyun-id.jpg", 
+    trait: `精通多国语言的天才 MC<br><span class="kr-line">다국어 능통한 천재 MC</span>
+◦ 虽然是个爱哭鬼，但却是可靠的努力派队长 ✨<br><span class="kr-line">울보지만 믿음직스러운 노력파 리더 ✨</span>
+◦ 用出众的音乐感和自作 Rap 打动大家的心<br><span class="kr-line">뛰어난 음악 센스와 자작 랩으로 모두의 마음을 움직여</span>
+◦ 共情妖精，也是充满活力的 ENFP 🕊️<br><span class="kr-line">공감 요정이자 생생한 ENFP 🕊️</span>
+◦ 非常爱成员们和 ONEDOOR ❤️<br><span class="kr-line">멤버들과 ONEDOOR를 정말 사랑해 ❤️</span>
+♡ 禁止流着口水看他！会嫉妒的<br><span class="kr-line">침 흘리며 보기 금지! 질투하니까</span>`
+  },
+  {
+    name:"TAESAN", cn:"韩泰山（漢東旼）", nationality:"韩国", birthday:"2004年8月10日", zodiac:"狮子座", height:"183 cm", mbti:"ENTJ", note:"a little mystery in blue.", doodle:"mooncat", plushName:"HAN TATPUNG", plushImage:"han-tatpung.jpg", plushColor:"#7c9ec7", plushWash:"#e1eaf4", plushCaption:"cool, collected, always ♡", position:"ACE", 
+    listImage:"taesan.jpg", detailImage:"taesan-detail.jpg", idImage:"taesan-id.jpg", 
+    trait: `虽然很成熟，但有时却像个调皮的小学生<br><span class="kr-line">어른스럽지만 가끔은 초등학생 같은 장난꾸러기</span>
+◦ 茄子是宿敌<br><span class="kr-line">가지가 천적</span>
+◦ 充满艺术感的自拍 📸<br><span class="kr-line">예술적인 셀카 📸</span>
+◦ 被他无意间露出的纯真笑容击中的 ONEDOOR 有很多<br><span class="kr-line">무심코 보여주는 순수한 미소에 심쿵하는 ONEDOOR 다수</span>
+◦ 玩游戏比任何人都认真 💛<br><span class="kr-line">게임은 누구보다 진심 💛</span>
+◦ 傲娇猫咪系<br><span class="kr-line">츤데레 냥냥이 계</span>
+◦ 对 ONEDOOR 和 WOONHAK 很心软<br><span class="kr-line">ONEDOOR와 WOONHAK에겐 무르다</span>
+♡ 喜欢搭配衣服和鞋子的 High-sense BOY<br><span class="kr-line">옷이나 신발을 꾸미는 걸 좋아하는 하이센스 BOY</span>`
+  },
+  {
+    name:"LEEHAN", cn:"金桐儇", nationality:"韩国", birthday:"2004年10月20日", zodiac:"天秤座", height:"182 cm", mbti:"ESFJ", note:"somewhere under the blue.", doodle:"fish", plushName:"312", plushImage:"312.jpg", plushColor:"#b0a944", plushWash:"#f6f4cc", plushCaption:"a soft spot in the blue ♡", position:"门面", 
+    listImage:"leehan.jpg", detailImage:"leehan-detail.jpg", idImage:"leehan-id.jpg", 
+    trait: `BOYNEXTDOOR 的手帕担当！<br><span class="kr-line">BOYNEXTDOOR의 손수건 담당!</span>
+◦ 悠然自得的 My Pace 王子 👑<br><span class="kr-line">느긋한 마이페이스 왕자님 👑</span>
+◦ 喜欢软糖<br><span class="kr-line">구미(gummy)를 좋아해</span>
+◦ 以独特的视角为团队活动带来新点子<br><span class="kr-line">독자적인 시점으로 팀 활동에 새로운 아이디어를 가져와</span>
+◦ 对鱼有着 BIG LOVE 🐟<br><span class="kr-line">물고기에 대한 BIG LOVE 🐟</span>
+◦ 奇特的脑回路让成员和 ONEDOOR 都深陷其中<br><span class="kr-line">기발한 사고회로에 멤버도 ONEDOOR도 푹 빠져</span>
+◦ 低音炮嗓音<br><span class="kr-line">저음 보이스</span>
+♡ 团队的精神安定之所<br><span class="kr-line">팀의 정신적 안정처</span>`
+  },
+  {
+    name:"WOONHAK", cn:"金云鹤", nationality:"韩国", birthday:"2006年11月29日", zodiac:"射手座", height:"184 cm", mbti:"ENFJ", note:"our little bundle of joy ♡", doodle:"bear", plushName:"WOONBABY", plushImage:"woonbaby.jpg", plushColor:"#84b88e", plushWash:"#e3f3e6", plushCaption:"our tiny ray of warmth ♡", position:"忙内", 
+    listImage:"woonhak.jpg", detailImage:"woonhak-detail.jpg", idImage:"woonhak-id.jpg", 
+    trait: `早起强者<br><span class="kr-line">아침에 강함</span>
+◦ 他一笑，快乐就会传染 😊<br><span class="kr-line">그가 웃으면 해피가 전파돼 😊</span>
+◦ 高个子！<br><span class="kr-line">큰 키!</span>
+◦ 表情管理天才<br><span class="kr-line">표정 관리의 천재</span>
+◦ 天真烂漫的忙内<br><span class="kr-line">천진난만 막내</span>
+◦ 笑的时候露出的牙齿是魅力点 🌻<br><span class="kr-line">웃을 때 보이는 이빨이 매력 포인트 🌻</span>
+◦ 多才多能！！从作曲到主持，什么都可以交给他！<br><span class="kr-line">다재다능!! 악곡 제작부터 진행까지 뭐든지 맡겨줘!</span>
+♡ “什么呀~”是口头禅 「뭐야~!!」<br><span class="kr-line">"뭐야~" 가 말버릇 「뭐야~!!」</span>`
+  }
+];
+
+const memberStages = {
+  "LEEHAN": [
+    {title:"OUR", date:"MCD · 2024.04.18", cover:"leehan-our.jpg", video:"videos/leehan-our.mp4"},
+    {title:"DANGEROUS", date:"MMA 2024 · 2024.11.30", cover:"leehan-dangerous.jpg", video:"videos/leehan-dangerous.mp4"},
+    {title:"I Feel Good", date:"SBS · 2025.05.25", cover:"leehan-feel-good.jpg", video:"videos/leehan-feel-good.mp4"}
+  ],
+  "TAESAN": [
+    {title:"I Feel Good", date:"MBC · 2025.05.17", cover:"taesan-feel-good.jpg", video:"videos/taesan-feel-good.mp4"},
+    {title:"오늘만 I LOVE YOU", date:"MBC · 2025.01.11", cover:"taesan-love-you.jpg", video:"videos/taesan-love-you.mp4"},
+    {title:"Nice Guy", date:"KBS · 2024.09.13", cover:"taesan-nice-guy.jpg", video:"videos/taesan-nice-guy.mp4"}
+  ],
+  "JAEHYUN": [
+    {title:"Animal", date:"KBS开放音乐会 · 2026.10.13", cover:"jaehyun-animal.jpg", video:"videos/jaehyun-animal.mp4"},
+    {title:"Hollywood Action", date:"MCD · 2025.10.23", cover:"jaehyun-hollywood-action.jpg", video:"videos/jaehyun-hollywood-action.mp4"},
+    {title:"Viral", date:"KBS · 2026.06.12", cover:"jaehyun-viral.jpg", video:"videos/jaehyun-viral.mp4"}
+  ],
+  "WOONHAK": [
+    {title:"One and Only", date:"KBS · 2023.06.02", cover:"woonhak-one-and-only.jpg", video:"videos/woonhak-one-and-only.mp4"},
+    {title:"Count to Love", date:"MCD · 2026.10.15", cover:"woonhak-count-to-love.jpg", video:"videos/woonhak-count-to-love.mp4"},
+    {title:"Nice Guy", date:"KBS · 2024.09.13", cover:"woonhak-nice-guy.jpg", video:"videos/woonhak-nice-guy.mp4"}
+  ],
+  "RIWOO": [
+    {title:"ddok ddok ddok", date:"KBS · 2026.05.15", cover:"riwoo-ddok-ddok-ddok.jpg", video:"videos/riwoo-ddok-ddok-ddok.mp4"},
+    {title:"Hollywood Action", date:"SBS · 2025.10.26", cover:"riwoo-hollywood-action.jpg", video:"videos/riwoo-hollywood-action.mp4"},
+    {title:"오늘만 I LOVE YOU", date:"MCD · 2025.01.09", cover:"riwoo-love-you.jpg", video:"videos/riwoo-love-you.mp4"}
+  ],
+  "SUNGHO": [
+    {title:"ADIOS！", date:"MBC · 2026.06.27", cover:"sungho-adios.jpg", video:"videos/sungho-adios.mp4"},
+    {title:"Hollywood Action", date:"KBS · 2025.10.31", cover:"sungho-hollywood-action.jpg", video:"videos/sungho-hollywood-action.mp4"},
+    {title:"Viral", date:"SBS · 2026.06.14", cover:"sungho-viral.jpg", video:"videos/sungho-viral.mp4"}
+  ]
+};
+
+const voiceData = {
+  "LEEHAN": [
+    {song:"123-78", cover:"no-genre-123-78.jpg", audio:"audio/leehan_123-78.mp3", fav_kr:"10초 아니 10년을 세어도", fav_cn:"数十秒 不 就算数十年\nAll I want is you", lyrics:`Wish you saw this\n多希望你能看到这一切\n엉망이 돼 버린 내 자태\n我已然乱七八糟的姿态\n\n10초 아니 10년을 세어도\n数十秒 不 就算数十年\nAll I want is you`},
+    {song:"Step By Step", cover:"no-genre-step-by-step.jpg", audio:"audio/leehan_step-by-step.mp3", fav_kr:"점점 더 잦아지는 비에", fav_cn:"因为越下越频繁的雨\n아스팔트 사이 흙 내음\n沥青味里混杂着泥土味", lyrics:`점점 더 잦아지는 비에\n因为越下越频繁的雨\n아스팔트 사이 흙 내음\n沥青味里混杂着泥土味\n\n아지랑이 길 가득한\n路面上升腾的地气\n경적 소리마저 뜨거워\n就算警笛声也如此燥热`},
+    {song:"Next Mistake", cover:"no-genre-next-mistake.jpg", audio:"audio/leehan_next-mistake.mp3", fav_kr:"아무래도 you might be my next mistake", fav_cn:"思来想去，你也许是我的下一个错误", lyrics:`Sorry babe\n아무래도 you might be my next mistake\n思来想去 你也许是我的下一个错误\n\n텁텁해진 우리 사이\nBaby should I let it end?\n亲爱的 我是否应该让一切画上句点\n\n이기적으로 굴 거 뻔하지만 그래도\n虽然很明显又会变得自私自利 但是\nPlease please love me`},
+    {song:"l i f e i s c o o l", cover:"no-genre-life-is-cool.jpg", audio:"audio/leehan_life-is-cool.mp3", fav_kr:"살랑거리며\n홀로 이 밤을 이 밤을 밤을 밤을", fav_cn:"水波微微荡漾\n今晚 今晚 今晚独自一人", lyrics:`Wise men say\n智者说\nIt's really cool to be holding wine alone baby\n一个人独饮感觉妙极了 宝贝\nOh like a river flowing\n如同一条流淌不息的河\n살랑거리며\n水波微微荡漾\n홀로 이 밤을 이 밤을 밤을 밤을\n今晚 今晚 今晚独自一人`}
+  ],
+  "TAESAN": [
+    {song:"Bathroom", cover:"no-genre-bathroom.jpg", audio:"audio/taesan_bathroom.mp3", fav_kr:"행운이 있긴 한지\n택도 없던데 나한텐", fav_cn:"是否真的有幸运存在\n怎么我身上从未出现过", lyrics:`Myfriend\nI threw all my coins into the Trevi\n我将我所有的硬币扔进许愿池里\n행운이 있긴 한지\n是否真的有幸运存在\n택도 없던데 나한텐\n怎么我身上从未出现过`},
+    {song:"Dangerous", cover:"no-genre-dangerous.jpg", audio:"audio/taesan_dangerous.mp3", fav_kr:"Everybody be quiet\nMom and dad should not hear this song", fav_cn:"大家保持安静\n妈妈和爸爸不应该听到这首歌", lyrics:`Everybody be quiet\n大家保持安静\nMom and dad should not hear this song\n妈妈和爸爸不应该听到这首歌\nYou need to put on earphones\n你需要戴上耳机\nI'm sure you'll all agree bro\n我相信你们都会同意 哥们\n\nSorry\n抱歉\nWatch out we pop out\n当心一些 我们闪亮登场\nLet's fill up some dopamine\n我们让身体里充斥着多巴胺\n장난 혹은 방황\n捣蛋还是彷徨\nPlease don't tell my mom and daddy\n请不要告诉我的妈妈和爸爸\n\n친구한테 부모님이 늦게 자서\n跟朋友说爸妈睡得晚\n조금 늦을 것 같으니 기다려달라 해\n可能会迟到一点 让他等一会\n빼 도어락 건전지\n拔掉电子门锁的电池\n지갑 두고 왔네 아 내 정신\n忘记带钱包了 啊 我的记性`},
+    {song:"JAM!", cover:"no-genre-jam.jpg", audio:"audio/taesan_jam.mp3", fav_kr:"JAM Replay that\nJAM Get lazy\nJAM So amazing", fav_cn:"尽情狂欢 反复重播\n尽情狂欢 慵懒散漫\n尽情狂欢 简直妙不可言", lyrics:`Spin the bottle\nOkay next time is you you\nJump the hurdle\nBass in my body woo woo\nWhere's my shawty\nI like the way you move move\n헛기침해 흥흥\n干咳一声 哼哼\nBro next time is\n\nJAM Replay that\n尽情狂欢 反复重播\nJAM Get lazy\n尽情狂欢 慵懒散漫\nJAM So amazing\n尽情狂欢 简直妙不可言\n심의에 맞게 chillin'\n合乎审核标准 惬意自在\n\nI don't need balance\n我不需要保持平衡\n리듬에 맛 들려 미간이 씰룩\n沉浸在节奏里 眉头也舒展开\nIt's not a challenge\n这并不是挑战\n잠꼬대처럼 막 발음을 굴리지\n就像说梦话一样乱发音不`}
+  ],
+  "JAEHYUN": [
+    {song:"Dangerous", cover:"no-genre-dangerous.jpg", audio:"audio/jaehyun_dangerous.mp3", fav_kr:"옥상을 아지트 삼아 아침을 반겨", fav_cn:"把天台当作我们的秘密基地 迎接黎明", lyrics:`다 같이 돌자 동네 한 바퀴\n大家一起绕着小区转一圈\n하여튼간 못 속여 엄마 아빠 피\n无论如何 爸爸妈妈的血缘骗不了人\n모아니면 도 분위긴 Iike 한가위\n放手搏一把 氛围像是中秋节\n혼자는 무서우니까 같이 놀아 낮까지\n一个人会害怕一起玩到天亮吧\n\n아빠 지갑에는 손 댄 적 없지만\n虽然没动过爸爸的钱包\n아빠 명품 옷을 걸친 적은 있어\n但却穿过爸爸的名牌衣服\n어릴 적 혼날 때 엄마 잔소리 안 듣고\n小时候挨骂时 不听妈妈的唠叨\n방바닥 무늬를 세어 본 적도 있어\n也曾盯着房间地板的花纹数过\n\n날은 저물었어\n夜幕降临\n갈 길은 멀었어\n路还很长\n옥상을 아지트 삼아 아침을 반겨\n把天台当作我们的秘密基地 迎接黎明`},
+    {song:"Next Mistake", cover:"no-genre-next-mistake.jpg", audio:"audio/jaehyun_next-mistake.mp3", fav_kr:"아무래도 you might be my next mistake", fav_cn:"思来想去 你也许是我的下一个错误", lyrics:`공허함이 싫어 찾은 love\n讨厌那种空虚感 寻找到的爱\nIt started smooth but 머지않아 또\n开始的时候一切进展顺利 但是没过多久 又会再犯\n\n부르튼 눈에 잠긴 목소리\n肿胀的双眼 喑哑的嗓音\n새벽 정적 fan sound\n凌晨的寂静与风扇声\n\nSorry babe\n对不起 宝贝\n아무래도 you might be my next mistake\n思来想去 你也许是我的下一个错误`},
+    {song:"Earth, Wind & Fire", cover:"no-genre-earth-wind-fire.jpg", audio:"audio/jaehyun_earth-wind-fire.mp3", fav_kr:"왜 넌 갈팡질팡 날 헛갈려 해", fav_cn:"为什么你让我不知所措 心神纷乱", lyrics:`왜 넌 갈팡질팡 날 헛갈려 해\n为什么你让我不知所措 心神纷乱\n이것저것 재지 말고 say yes\n不要斤斤计较 同意我的请求吧\n\nTalk에서 보이는 예의\n从谈吐里体现的礼仪\nManners maketh man\n몸에 배어 있는 에티켓\n已成习惯的礼节\n내 이름에 적어 석자 젠틀맨\n绅士二字本就刻在我的名字里\nYeah yeah yeah yes\nI'm cheesy greasy freezy breezy\n我俗不可耐 却又松弛自在\n\nBaby boo my sweetie darling think I love you more\n\nBaby boo my sweetie darling\nthink | love you\nDon't know what you know`}
+  ],
+  "SUNGHO": [
+    {song:"I Wonder", cover:"no-genre-i-wonder.jpg", audio:"audio/sungho_i-wonder.mp3", fav_kr:"고맙다 그립다 사랑한다\n원한다 아프다 불안하다", fav_cn:"谢谢你 好想你 我爱你\n渴望着心痛着 不安着", lyrics:`왜 가장 서투른 때 내가\n为什么偏偏是在我最笨拙的时候\n왜 가장 완벽한 널 만나\n为什么偏偏遇见了如此完美的你\n서두른 마음에\n因为太过急切的心意\n목이 쉰 것조차 모르고\n连嗓子沙哑都浑然不觉\n"I love you baby'\n그렇게 시작된 첫 serenade\n就这样开始的第一首小夜曲\n\n고맙다 그립다 사랑한다\n谢谢你 好想你 我爱你\n원한다 아프다 불안하다\n渴望着心痛着 不安着`},
+    {song:"Crying", cover:"no-genre-crying.jpg", audio:"audio/sungho_crying.mp3", fav_kr:"I'm crying", fav_cn:"", lyrics:`I'm crying\nOh I…\nI'm crying\nOh I…\n\n이럴 거면 차라리 더\n若是如此 倒不如\n못된 말로 하지\n说些更过分的话\n이게 더 잔인해\n这样倒更加残忍`},
+    {song:"amnesia", cover:"no-genre-amnesia.jpg", audio:"audio/sungho_amnesia.mp3", fav_kr:"매일같이 반복되네 think I have\namnesia amnesia", fav_cn:"每天都在重复 我想我有健忘症", lyrics:`매일같이 반복되네 think I have\namnesia amnesia\n每天都在重复 我想我有健忘症\n지겹지도 않게 다퉈 돌아서면\n不厌其烦地争吵 若是就此转身\n후회해 희한해\n会后悔 很神奇\nOh 물어뜯고 할퀴고 늘 다투고\n中伤 攻击 总是争吵\n\n짜증 내고 돌아서서\n发过脾气转过身\n머리를 터는 나는 so stupid\n揉搓着头发的我 多么蠢笨\n열을 내고 돌아서서\n发过火转过身\n눈물 흘리는 너는 so selfish\n流着泪的你 多么自私`}
+  ],
+  "WOONHAK": [
+    {song:"JAM!", cover:"no-genre-jam.jpg", audio:"audio/woonhak_jam.mp3", fav_kr:"못 감춰 노는 기질", fav_cn:"藏不住爱玩的气质", lyrics:`I don't need balance\n我不需要保持平衡\n리듬에 맛 들려 혀를 또 낼름\n沉浸在节奏里 吐着舌头\nIt's not a challenge\n这并不是挑战\n기지개 켜듯이 몸을 쭉 늘리지 yeah\n像伸懒腰一样绷直身子\n\nJAM Replay that\n尽情狂欢 反复重播\nJAM Get lazy\n尽情狂欢 慵懒散漫\nJAM He slayed it\n尽情狂欢 他秒杀全场\n못 감춰 노는 기질\n藏不住爱玩的气质`},
+    {song:"Live in Paris", cover:"no-genre-live-in-paris.jpg", audio:"audio/woonhak_paris.mp3", fav_kr:"On & on\n꺼질 일이 없는 my studio light", fav_cn:"一刻不歇\n我工作室的灯不会关", lyrics:`Slayer들은 깨 있어\n顶级高手们醒着\n눈 뜨고 꿈을 꿔\n睁着眼睛做梦\nUh 아찔해진다\n越来越晕\nUh 아 떠올라\n啊想起来了\n\nTik-tak tik-tak\n滴答作响\n내 시계는 비행 없이 parisian\n我的手表没有飞行模式 就像是巴黎人\nOn & on\n一刻不歇\n꺼질 일이 없는 my studio light\n我工作室的灯不会关`},
+    {song:"Crying", cover:"no-genre-crying.jpg", audio:"audio/woonhak_crying.mp3", fav_kr:"네가 웃으면 속이 타\n오늘도 난 하염없이 Iying", fav_cn:"若你笑着 我便更感焦心\n今天我也怅然地躺下", lyrics:`한바탕 감정을 다 토해 내고\n将情绪一顿发泄\n잘 보이려 입어본 재킷을 확 던져\n为了看起来无妨一把扔开穿上的夹克\n한동안 또 괜찮다가도\n虽然一度还过得还不错\n하루 이틀 지나면 결국 망가져\n一两天过去 最终还是不成样\n\n친구들 앞에서 la la la\n在朋友们面前嬉笑着\n홀로 집에 가는 길엔 cry\n在独自回家的路上哭泣\n네가 웃으면 속이 타\n若你笑着 我便更感焦心\n오늘도 난 하염없이 Iying\n今天我也怅然地躺下`},
+    {song:"123-78", cover:"no-genre-123-78.jpg", audio:"audio/woonhak_123-78.mp3", fav_kr:"My baby Georgia baby Georgia", fav_cn:"", lyrics:`My baby Georgia baby Georgia\nCan't take my eyes off you\nMy hometown is only you\n\n그 여자를 왜 좋아하냐구요?\n问我为什么喜欢那个女人么\n딱히 이유랄 게 있을까요\n还能有什么特别的理由么\n그냥 다 좋은데\n就是全都喜欢\n뭐 하나를 꼽자면\n如果非要说一个的话\n노래를 잘 불러서는 아니고\n不是因为歌唱得很好`}
+  ],
+  "RIWOO": [
+    {song:"DIVE", cover:"no-genre-dive.jpg", audio:"audio/riwoo_dive.mp3", fav_kr:"난 한번에 dive into you", fav_cn:"我义无反顾地投入你的世界", lyrics:`난 한번에 dive into you\n我义无反顾地投入你的世界\n물보라가 쳐 만든 파도에 또\n在浪花激起的波涛之中 再次\nDive into you\n빠져가\n不断沉沦\n\nI just want to stop sinking alone\n我只是渴望不再独自沉沦\n\nDive\nBaby I dive\n널 유영해\n在你的世界里畅游\nDive\nI could die`},
+    {song:"Amnesia", cover:"no-genre-amnesia.jpg", audio:"audio/riwoo_amnesia.mp3", fav_kr:"Think I have amnesia 약도 없다고", fav_cn:"我想我有健忘症无可救葯", lyrics:`좋을 땐 또 뭐가 그리 좋다고\n好的时候又好到不行\nThink I have amnesia 약도 없다고\n我想我有健忘症无可救葯\nOh 뭘 해도 네가 예쁜데 난\n我觉得你做什么都好美\n\n네 신경을 한껏 또 한껏 벅벅 긁고 또\n在你的底线上反复横跳\nSorry 미안 싹싹 빌어도\n即使是说抱歉 对不起 向你乞求\n내가 원하던 사이는\n我期待的关系\n이게 아니었는데 oh baby\n并不是这样 宝贝`},
+    {song:"장난쳐? (Is That True?)", cover:"no-genre-is-that-true.jpg", audio:"audio/riwoo_is-that-true.mp3", fav_kr:"행복한 척이라고 말해줘", fav_cn:"就算是假装幸福 也要告诉我", lyrics:`I know I messed up what we had\n我知道我毁掉了我们之间的感情\n예고도 없이 장난쳐?\n怎么能毫无预兆地开玩笑呢\nLove him like you used to love me\n就像你以前爱我那样爱上了他\nLove him like you used to 창각쳐?\n就像你以前爱我一样爱他 是在开玩笑吗\n\n행복한 척이라고 말해줘\n就算是假装幸福 也要告诉我\n거짓 적선이라도 줘\n就算是虚伪的施舍也给我吧`}
+  ]
+};
+
+function songPalette(song) {
+  const title = String(song || "").trim().toLowerCase();
+  if (["123-78", "crying"].includes(title)) return "palette-pink";
+  if (title === "step by step" || title === "i wonder") return "palette-lilac";
+  if (title === "next mistake" || title === "bathroom") return "palette-apricot";
+  if (title === "amnesia" || title === "l i f e i s c o o l") return "palette-sage";
+  if (title === "dive" || title === "is that true?" || title === "장난쳐? (is that true?)") return "palette-blue";
+  if (title === "jam!" || title === "earth, wind & fire" || title === "one and only" || title === "count to love") return "palette-butter";
+  if (title === "dangerous" || title === "viral" || title === "nice guy" || title === "animal" || title === "hollywood action" || title === "live in paris") return "palette-cocoa";
+  return "palette-blue";
+}
+
+function openMember(index) {
+  const m = memberProfiles[index];
+  if (!m) return;
+  
+  document.getElementById("homePage").style.display = "none";
+  document.getElementById("membersPage").style.display = "none";
+  document.getElementById("detailPage").style.display = "block";
+  document.getElementById("detailStatus").textContent = m.name + " — FILE";
+  document.getElementById("profileTitle").textContent = m.name;
+  document.getElementById("profileSubtitle").textContent = "PERSONAL ARCHIVE / NO. 0" + (index + 1);
+  document.getElementById("profileChineseName").textContent = m.cn;
+  
+  document.getElementById("profileImage").src = m.detailImage;
+  document.getElementById("profileIdImage").src = m.idImage;
+  document.getElementById("profileIdImage").alt = m.name + " ID portrait";
+  document.getElementById("profileImage").alt = m.name;
+  document.getElementById("profileCaption").textContent = "0" + (index + 1) + " / OUR BOY";
+  document.getElementById("profileNoteCopy").textContent = m.note;
+  
+  // 渲染玩偶卡片
+  const plushImage = document.getElementById("profilePlushImage");
+  const plushFallback = document.getElementById("profilePlushFallback");
+  plushImage.style.display = "block";
+  plushFallback.style.display = "none";
+  plushImage.src = m.plushImage;
+  plushImage.alt = m.plushName + " official character plush";
+  plushImage.onerror = function () { this.style.display = "none"; plushFallback.style.display = "grid"; };
+  document.getElementById("profilePlushName").textContent = m.plushName;
+  document.getElementById("profilePlushCaption").textContent = m.plushCaption;
+  document.getElementById("profilePlushIndex").textContent = "COLLECTIBLE 0" + (index + 1) + " / 06";
+  document.getElementById("profilePlushVisual").style.setProperty("--plush-accent", m.plushColor);
+  document.getElementById("profilePlushVisual").style.setProperty("--plush-wash", m.plushWash);
+  document.getElementById("plushCard").style.setProperty("--plush-accent", m.plushColor);
+  document.getElementById("plushCard").style.setProperty("--plush-wash", m.plushWash);
+
+  const memberIdLabel = document.querySelector(".info-name-label");
+  if (memberIdLabel) memberIdLabel.textContent = "MEMBER ID / NO. 0" + (index + 1);
+
+  const doodles = {
+    cat: '<path d="M10 15 L11 5 L18 10 Q24 7 30 10 L37 5 L38 16 Q41 25 31 29 Q23 32 16 28 Q8 24 10 15Z"/><path d="M17 19h.5 M30 19h.5 M21 23q3 2 6 0"/><path d="M23 21l1 1 1-1"/><path d="M39 27q3-3 5 0q-2 5-5 0Z"/>',
+    puppy: '<path d="M13 12Q5 8 6 20Q8 27 15 23 M35 12Q43 8 42 20Q40 27 33 23"/><path d="M13 13Q24 6 35 13L34 25Q24 34 14 25Z"/><path d="M20 20h.5 M29 20h.5 M22 24q2 3 4 0"/><path d="M39 4l1.5 3.5L44 9l-3.5 1.5L39 14l-1.5-3.5L34 9l3.5-1.5Z"/>',
+    sun: '<circle cx="24" cy="18" r="7"/><path d="M24 5v4 M24 27v4 M11 18H7 M41 18h-4 M15 9l-3-3 M33 9l3-3 M15 27l-3 3 M33 27l3 3"/><path d="M18 18h.5 M29 18h.5 M21 22q3 2 6 0"/><path d="M8 30q4-4 8 0"/>',
+    mooncat: '<path d="M12 15L13 5L20 11Q25 9 30 11L37 5L38 16Q40 26 30 29Q20 32 14 25Z"/><path d="M19 19h.5 M30 19h.5 M22 23q2 2 4 0"/><path d="M7 8q-3 4 0 7q3-3 0-7Z"/><path d="M38 29q4-3 6 1q-3 4-6-1Z"/>',
+    fish: '<path d="M8 18Q17 7 30 18Q17 29 8 18Z"/><path d="M30 18l9-7v14Z"/><circle cx="15" cy="17" r="1"/><path d="M4 10q-3 3 0 6 M3 22q-2 3 1 5 M17 11q3 2 3 5"/><path d="M36 5q3 2 0 4 M41 28q3 2 0 4"/>',
+    bear: '<circle cx="24" cy="19" r="12"/><circle cx="15" cy="8" r="5"/><circle cx="33" cy="8" r="5"/><circle cx="20" cy="18" r=".8"/><circle cx="28" cy="18" r=".8"/><path d="M22 22q2-2 4 0q-2 4-4 0Z"/><path d="M39 7l1.5 3.5L44 12l-3.5 1.5L39 17l-1.5-3.5L34 12l3.5-1.5Z"/>'
+  };
+  document.getElementById("profileDoodle").innerHTML = doodles[m.doodle] || doodles.cat;
+  document.getElementById("profileNumber").textContent = "No. 0" + (index + 1);
+  document.getElementById("profileTrait").innerHTML = m.trait;
+
+  const facts = [
+    ["REAL NAME",m.cn],["NATIONALITY",m.nationality],["BIRTHDAY",m.birthday],
+    ["ZODIAC",m.zodiac],["POSITION",m.position],["MBTI",m.mbti],["HEIGHT",m.height]
+  ];
+  document.getElementById("profileFacts").innerHTML = facts.map(([label,value]) =>
+    '<div class="info-item"><span class="info-label">' + label + '</span><span class="info-value">' + value + '</span></div>'
+  ).join("");
+
+  const memberArchives = document.getElementById("memberArchives");
+  const stageFan = document.getElementById("stageFan");
+  const voiceLogGrid = document.getElementById("voiceLogGrid");
+  
+  stageFan.innerHTML = ""; 
+  voiceLogGrid.innerHTML = "";
+
+  if (memberStages[m.name]) {
+    memberArchives.hidden = false;
+
+    // 渲染舞台
+    memberStages[m.name].forEach((stage, idx) => {
+      const btn = document.createElement("button");
+      btn.className = "stage-card";
+      btn.type = "button";
+      btn.dataset.index = idx;
+      btn.innerHTML = `
+        <span class="stage-tape"></span>
+        <div class="stage-cover"><img src="${stage.cover}" alt="${stage.title} cover" onerror="this.style.opacity='.0'"></div>
+        <h3>STAGE 0${idx + 1}</h3>
+        <p>${stage.title}</p>
+        <small>${stage.date}</small>
+        <span class="stage-tap">WATCH STAGE ↗</span>
+      `;
+      btn.addEventListener("click", () => openStageModal(m.name, idx));
+      stageFan.appendChild(btn);
+    });
+
+    // 渲染音频
+    if (voiceData[m.name]) {
+      voiceData[m.name].forEach((item, idx) => {
+        const article = document.createElement("article");
+        article.className = "voice-card " + songPalette(item.song);
+        article.innerHTML = `
+          <div class="voice-cover"><img src="${item.cover}" alt="${item.song} cover" onerror="this.style.opacity='.0'"></div>
+          <h3>${item.song}</h3>
+          <div class="voice-favorite">${item.fav_kr}<span class="translation">${item.fav_cn}</span></div>
+          <div class="voice-controls">
+            <button type="button" class="play-audio" aria-label="Play ${item.song}">▶</button>
+            <input class="voice-progress" type="range" min="0" max="100" value="0" aria-label="${item.song} playback progress">
+            <span class="voice-time">--:--</span>
+            <audio preload="metadata" src="${item.audio}"></audio>
+          </div>
+          <div class="voice-card-bottom">
+            <button class="lyrics-open" type="button">LYRICS ↗</button>
+            <span class="voice-note">this little line ♡</span>
+          </div>
+        `;
+        // 绑定歌词事件
+        article.querySelector(".lyrics-open").addEventListener("click", () => {
+          document.getElementById("lyricsModalTitle").textContent = item.song;
+          document.getElementById("lyricsModalContent").textContent = item.lyrics;
+          document.getElementById("lyricsModal").classList.add("is-open");
+        });
+        // 绑定音频事件
+        const audio = article.querySelector("audio");
+        const play = article.querySelector(".play-audio");
+        const progress = article.querySelector(".voice-progress");
+        const time = article.querySelector(".voice-time");
+        play.addEventListener("click", async () => {
+          if (!audio.src || audio.error) { time.textContent = "ADD AUDIO"; return; }
+          if (audio.paused) {
+            document.querySelectorAll(".voice-card audio").forEach(other => { if (other !== audio) other.pause(); });
+            try { await audio.play(); } catch(e) { time.textContent = "ADD AUDIO"; }
+          } else audio.pause();
+        });
+        audio.addEventListener("play", () => play.textContent = "Ⅱ");
+        audio.addEventListener("pause", () => play.textContent = "▶");
+        audio.addEventListener("loadedmetadata", () => time.textContent = formatVoiceTime(audio.duration));
+        audio.addEventListener("timeupdate", () => {
+          if (audio.duration) progress.value = String(audio.currentTime / audio.duration * 100);
+          time.textContent = formatVoiceTime(audio.currentTime);
+        });
+        progress.addEventListener("input", () => { if (audio.duration) audio.currentTime = Number(progress.value) / 100 * audio.duration; });
+
+        voiceLogGrid.appendChild(article);
+      });
+    }
+  } else {
+    memberArchives.hidden = true;
+  }
+
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+function backMembers() {
+  document.getElementById("detailPage").style.display = "none";
+  document.getElementById("membersPage").style.display = "block";
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+function enterHome() {
+  document.getElementById("homePage").style.display = "none";
+  document.getElementById("membersPage").style.display = "block";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function backHome() {
+  document.getElementById("membersPage").style.display = "none";
+  document.getElementById("homePage").style.display = "block";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function openStageModal(memberName, stageIndex) {
+  const item = memberStages[memberName][stageIndex];
+  if (!item) return;
+  
+  document.getElementById("stageModalTitle").textContent = item.title;
+  const container = document.getElementById("stageVideoContainer");
+  const modalPaper = document.querySelector("#stageModal .modal-paper");
+  
+  modalPaper.classList.remove("is-vertical");
+  container.className = "modal-placeholder";
+  container.innerHTML = "Your stage video will appear here once you add the video file.<br>Place it in <code>" + item.video + "</code>.";
+  
+  const video = document.createElement("video");
+  video.className = "modal-video";
+  video.controls = true;
+  video.playsInline = true;
+  video.preload = "metadata";
+  video.src = item.video;
+  
+  video.onerror = () => { video.remove(); };
+  video.onloadedmetadata = () => { 
+    container.className = ""; 
+    container.innerHTML = ""; 
+    container.appendChild(video); 
+    if (video.videoHeight > video.videoWidth) {
+      modalPaper.classList.add("is-vertical");
+    }
+  };
+  document.getElementById("stageModal").classList.add("is-open");
+}
+
+document.querySelectorAll("[data-close-modal]").forEach(button => {
+  button.addEventListener("click", () => {
+    const modal = document.getElementById(button.dataset.closeModal);
+    modal.classList.remove("is-open");
+    const video = modal.querySelector("video");
+    if (video) video.pause();
+  });
+});
+document.querySelectorAll(".media-modal").forEach(modal => {
+  modal.addEventListener("click", event => {
+    if (event.target === modal) {
+      modal.classList.remove("is-open");
+      const video = modal.querySelector("video");
+      if (video) video.pause();
+    }
+  });
+});
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") document.querySelectorAll(".media-modal.is-open").forEach(modal => {
+    modal.classList.remove("is-open");
+    const video = modal.querySelector("video");
+    if (video) video.pause();
+  });
+});
+
+function formatVoiceTime(seconds) {
+  if (!Number.isFinite(seconds)) return "--:--";
+  return Math.floor(seconds/60) + ":" + String(Math.floor(seconds%60)).padStart(2,"0");
+}
+
+</script>
+
+</body>
+</html>
